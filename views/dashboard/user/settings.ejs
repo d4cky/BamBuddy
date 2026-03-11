@@ -35,7 +35,7 @@
     <!-- Axios -->
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <!-- reCAPTCHA v3 -->
-    <script src="https://www.google.com/recaptcha/api.js?render=6Lcij64rAAAAAICAzZK7HDHuxAUE-VQLAsZ7Wyky"></script>
+    <script src="https://www.google.com/recaptcha/api.js?render=<%= publicConfig?.recaptchaSiteKey %>"></script>
     <script src="/js/theme-loader.js"></script>
   </head>
   <body class="<%= user?.theme || 'light' %>">

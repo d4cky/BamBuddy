@@ -18,11 +18,11 @@ Use the following accounts to log in and test website functionality:
 
 | Role    | Email / Username             | Password     |
 | ------- | ---------------------------- | ------------ |
-| Admin   | Bambuddyadmin1@gmail.com     | Bambuddy123! |
-| Guide 1 | Bambuddytourguide1@gmail.com | Bambuddy123! |
-| Guide 2 | Bambuddytourguide2@gmail.com | Bambuddy123! |
-| User 1  | Bambuddyuser1@gmail.com      | Bambuddy123! |
-| User 2  | Bambuddyuser2@gmail.com      | Bambuddy123! |
+| Admin   | `<admin-email>`              | `<admin-password>` |
+| Guide 1 | `<guide1-email>`             | `<guide1-password>` |
+| Guide 2 | `<guide2-email>`             | `<guide2-password>` |
+| User 1  | `<user1-email>`              | `<user1-password>` |
+| User 2  | `<user2-email>`              | `<user2-password>` |
 
 ---
 
@@ -30,7 +30,10 @@ Use the following accounts to log in and test website functionality:
 
 We use **MongoDB Atlas** for our database.
 
-- Connection String: mongodb+srv://bambuddydb:bambuddy123@studioproject.eakdu8f.mongodb.net/?retryWrites=true&w=majority&appName=StudioProject
+- **Do not commit connection strings** (they include credentials).
+- Configure the database via environment variable `MONGODB_URI`.
+- Example format:
+  - `mongodb+srv://<username>:<password>@<cluster>/<db>?retryWrites=true&w=majority`
 
 ## 📝 Features Overview
 

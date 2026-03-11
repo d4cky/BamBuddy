@@ -20,7 +20,7 @@
   <!-- Password Validation -->
   <script src="/js/passwordValidation.js"></script>
   <!-- reCAPTCHA v3 -->
-  <script src="https://www.google.com/recaptcha/api.js?render=6Lcij64rAAAAAICAzZK7HDHuxAUE-VQLAsZ7Wyky"></script>
+  <script src="https://www.google.com/recaptcha/api.js?render=<%= publicConfig?.recaptchaSiteKey %>"></script>
     
   </head>
   <body class="light">
@@ -212,7 +212,7 @@ document.querySelector("#signupForm").addEventListener("submit", async (e) => {
     return;
   }
   
-  grecaptcha.execute("6Lcij64rAAAAAICAzZK7HDHuxAUE-VQLAsZ7Wyky", {action: "register"}).then(async function(token) {
+  grecaptcha.execute("<%= publicConfig?.recaptchaSiteKey %>", {action: "register"}).then(async function(token) {
     const data = {
       firstName: document.querySelector("#firstName").value,
       lastName: document.querySelector("#lastName").value,

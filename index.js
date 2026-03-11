@@ -58,6 +58,23 @@ app.use((req, res, next) => {
   next();
 });
 
+// Expose ONLY non-sensitive "public" config to EJS templates.
+// IMPORTANT:
+// - Do not pass the whole process.env to views.
+// - reCAPTCHA "site key" is meant to be public (used in the browser).
+// - Secrets (DB URI, session secret, reCAPTCHA secret key, OAuth secrets) must stay server-side only.
+app.use((req, res, next) => {
+  res.locals.publicConfig = {
+    // Used by pages that embed the Google Maps JavaScript SDK in <script src="...">
+    googleMapsApiKey: process.env.GOOGLE_MAPS_API_KEY || "",
+
+    // Used by pages that load reCAPTCHA v3 in the browser.
+    // Keep naming consistent with existing backend env naming style.
+    recaptchaSiteKey: process.env.reCAPTCHA_site_key || "",
+  };
+  next();
+});
+
 // Middleware to inject notifications into all views
 const { injectNotifications } = require('./src/middleware/notificationMiddleware');
 app.use(injectNotifications);

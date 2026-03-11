@@ -19,7 +19,7 @@
   <!-- Axios -->
   <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
   <!-- reCAPTCHA v3 -->
-  <script src="https://www.google.com/recaptcha/api.js?render=6Lcij64rAAAAAICAzZK7HDHuxAUE-VQLAsZ7Wyky"></script>
+  <script src="https://www.google.com/recaptcha/api.js?render=<%= publicConfig?.recaptchaSiteKey %>"></script>
     
   </head>
   <body class="<%= user?.theme || 'light' %>">
@@ -164,7 +164,7 @@ document.addEventListener('DOMContentLoaded', setupPasswordFields);
 document.querySelector("form").addEventListener("submit", function(e) {
   e.preventDefault();
   grecaptcha.ready(function() {
-    grecaptcha.execute("6Lcij64rAAAAAICAzZK7HDHuxAUE-VQLAsZ7Wyky", { action: "login" })
+    grecaptcha.execute("<%= publicConfig?.recaptchaSiteKey %>", { action: "login" })
     .then(function(token) {
       fetch("/auth/login", {
         method: "POST",
