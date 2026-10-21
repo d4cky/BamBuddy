@@ -8,7 +8,7 @@ It provides a tour booking system, management dashboards, and a forum for discus
 ## 🔗 Website Access
 
 - **Live Website URL:** [https://bambuddy.onrender.com](https://bambuddy.onrender.com)
-- **GitHub Repository URL:** [https://github.com/RMIT-Vietnam-Teaching/group-project-wps-2025b-4bit.git]
+- **GitHub Repository URL:** [https://github.com/d4cky/BamBuddy](https://github.com/d4cky/BamBuddy) (originally built in [RMIT-Vietnam-Teaching/group-project-wps-2025b-4bit](https://github.com/RMIT-Vietnam-Teaching/group-project-wps-2025b-4bit))
 
 ---
 
@@ -113,33 +113,51 @@ We use **MongoDB Atlas** for our database.
 - **Backend:** Node.js, Express.js
 - **Frontend:** EJS Templates, CSS, JavaScript
 - **Database:** MongoDB Atlas with Mongoose
-- **Security:** Google reCAPTCHA v3, Middleware Validation, santilize-html, and mongo-sanitize
+- **Security:** Google reCAPTCHA v3, Middleware Validation, sanitize-html, and mongo-sanitize
 - **Accessibility:** WAI-ARIA and semantic HTML
 
 ## ⚙️ Installation
 
+Requires Node.js 18+ and a MongoDB database (Atlas or local).
+
 1. Clone the repository:
 
 ```bash
-git clone https://github.com/RMIT-Vietnam-Teaching/group-project-wps-2025b-4bit.git
+git clone https://github.com/d4cky/BamBuddy.git
+cd BamBuddy
 ```
 
-2. Install Dependencies
-```
+2. Install dependencies:
+
+```bash
 npm install
 ```
 
-3. Run the application
+3. Create your environment file and fill in the values (see comments inside):
+
+```bash
+cp .env.example .env
 ```
-npm start
-# or
-node index
+
+At minimum set `MONGODB_URI` and `SESSION_SECRET`. Google sign-in, Maps/Places and reCAPTCHA keys are needed only for those features.
+
+4. Run the application:
+
+```bash
+npm start      # or: npm run dev  (auto-restart with nodemon)
 ```
 
-4. Then open http://localhost:3000 in your browser.
+5. Open http://localhost:3000 in your browser.
+
+6. Run the unit tests:
+
+```bash
+npm test
+```
 
 
-Project Structure
+## 🗂 Project Structure
+
 ```
 project-root/
 ├── node_modules/         # Dependencies
@@ -157,6 +175,7 @@ project-root/
 │   ├── routes/           # Express routes for all modules
 │   ├── services/         # Business logic reusable across controllers
 │   └── utils/            # Google calendar logic
+├── tests/                # Jest unit tests
 ├── views/
 │   ├── auth/             # Login, register, password pages
 │   ├── dashboard/        # Tour guide dashboard templates
@@ -164,11 +183,10 @@ project-root/
 │   ├── pages/            # Static or general pages (Home, About, Contact)
 │   ├── partials/         # Shared layouts, navbars, footers
 │   └── user/             # User-specific templates
-├── .env                  # Environment variables
+├── .env.example          # Template for your local .env (never commit .env)
 ├── .gitignore            # Files ignored by Git
-├── index.js                # Entry point for Express application
+├── index.js              # Entry point for Express application
 ├── package.json          # Project metadata and scripts
-├── package-lock.json     # Dependency lock file
 └── README.md             # Project documentation
 ```
 
