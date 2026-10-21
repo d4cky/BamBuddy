@@ -9,12 +9,16 @@ const createStorage = (uploadPath) => {
     },
     filename: (req, file, cb) => {
       // Sanitize filename: keep safe chars only
-      const ext = path.extname(file.originalname).toLowerCase();
-      const raw = path.basename(file.originalname, ext);
+      const originalExt = path.extname(file.originalname);
+      const ext = originalExt.toLowerCase();
+      const raw = path.basename(file.originalname, originalExt);
       const safe = raw
+        .normalize("NFD")
+        .replace(/[\u0300-\u036f]/g, "") // drop accents: "Hội An" -> "Hoi An"
+        .replace(/[đĐ]/g, "d")
         .toLowerCase()
         .replace(/[^a-z0-9]+/g, "-")
-        .replace(/^-+|-+$/g, "");
+        .replace(/^-+|-+$/g, "") || "file";
       cb(null, `${safe}-${Date.now()}${ext}`);
     },
   });
