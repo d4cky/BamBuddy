@@ -108,10 +108,6 @@ app.use((err, req, res, next) => {
 });
 
 
-app.use('/getError', (req, res) => {
-  throw new Error('This is a test error for the 500 error page.');
-});
-
 
 app.listen(PORT, () => {
     // console log removed for production cleanliness

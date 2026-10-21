@@ -126,9 +126,9 @@ const verifyUserBooking = async (req, res, next) => {  // = verifyUser nhÆ°ng lá
         await verifySession(req, res, () => {
             // Check if user role is user
             if (req.user.role !== 'user') {
-                  const tourID = req.params.tourID;
-                 error = new Error('Only user can perform this action');
-                return res.redirect(`/tourDetail/${tourID}?error=${encodeURIComponent(error.message)}`);
+                const tourID = req.params.tourID;
+                const message = 'Only user can perform this action';
+                return res.redirect(`/tourDetail/${tourID}?error=${encodeURIComponent(message)}`);
             }
             // If everything is OK, continue
             next();
