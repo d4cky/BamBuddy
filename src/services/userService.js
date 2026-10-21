@@ -3,6 +3,7 @@ const Booking = require("../models/bookingSchema");
 const bcrypt = require("bcrypt");
 const path = require("path");
 const fs = require("fs");
+const { getAllDayGoogleCalendarUrl } = require("../utils/calendarHelper");
 
 class UserService {
   // Get profile
@@ -134,6 +135,15 @@ class UserService {
       tourDate: b.tourDate,
       pricing: b.pricing,
       status: b.status,
+      googleUrl:
+        b.status === "confirmed" && b.tourDate
+          ? getAllDayGoogleCalendarUrl({
+              title: b.tourID?.title || "Untitled Tour",
+              date: b.tourDate,
+              details: b.tourID?.itinerary || `Your booking for ${b.tourID?.title || "this tour"}`,
+              location: b.tourID?.location?.address || "",
+            })
+          : null,
     }));
 
     return {
