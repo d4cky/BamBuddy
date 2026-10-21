@@ -226,13 +226,12 @@
                         Rate Tour
                       </button>
                       <% if (booking.status === 'confirmed' && booking.tourDate) { %>
-                        <button class="btn google-calendar-btn"
-                          data-title="<%= booking.tourTitle %>"
-                          data-date="<%= booking.tourDate %>"
-                          data-location="<%= (booking.location && booking.location.address) ? booking.location.address : '' %>"
-                          data-itinerary="<%= booking.itinerary || '' %>">
+                        <a class="btn google-calendar-btn"
+                          href="<%= booking.googleUrl %>"
+                          target="_blank"
+                          rel="noopener noreferrer">
                           Add to your calendar
-                        </button>
+                        </a>
                       <% } %>
                       
                       <div id="rate-tour-description" class="visually-hidden">
@@ -373,7 +372,6 @@
       document.addEventListener('DOMContentLoaded', () => {
         const ratingButtons = document.querySelectorAll('.btn[data-tour-id]');
         const ratingForm = document.getElementById('ratingForm');
-        const googleCalendarButtons = document.querySelectorAll('.google-calendar-btn');
     
     
         ratingButtons.forEach(button => {
@@ -383,16 +381,6 @@
           });
         });
     
-        // Add event listeners for Google Calendar buttons
-        googleCalendarButtons.forEach(button => {
-          button.addEventListener('click', () => {
-            const title = button.getAttribute('data-title');
-            const date = button.getAttribute('data-date');
-            const location = button.getAttribute('data-location');
-            const itinerary = button.getAttribute('data-itinerary');
-            testGoogleCalendar(title, date, location, itinerary);
-          });
-        });
     
     
         ratingForm.addEventListener('submit', async function (e) {
@@ -439,25 +427,6 @@
         });
       });
     
-      // Test Google Calendar URL generation
-      function testGoogleCalendar(title, date, location, itinerary) {
-        const base = 'https://calendar.google.com/calendar/render?action=TEMPLATE';
-        const start = date.replace(/-/g, ""); // "2025-10-13" -> "20251013"
-        const end = start; // same day only
-        
-        const params = new URLSearchParams({
-          text: title,
-          dates: `${start}/${end}`,
-          details: itinerary || `Your booking for ${title}`,
-          location: location || "",
-        });
-        
-        const result = `${base}&${params.toString()}`;
-        
-        // Open the URL in a new tab
-        window.open(result, '_blank');
-      
-      }
     </script>
   </body>
 </html>
